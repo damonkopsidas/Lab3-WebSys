@@ -57,24 +57,25 @@ app.route('/login')
     console.log('The params:'+ req.query.input1 + " " + req.query.input2);
     
     res.send('this is the login form');
+    MongoClient.connect(uri, function(err, db) {
+        if(err) throw err;
+        console.log('Start the database stuff');
+        //Write database Insert/Update code...
+        var dbo = db.db("mydb");
+        var myobj = { firstInput: "user1", secondInput: "user1again"};
+        dbo.collection("users").insertOne(myobj, function(err, res) {
+            if (err) throw err;
+            console.log("1 user inserted");
+            db.close();
+        });
+        console.log('End database stuff');
+    });
 })
 //process the form (POST http:localhost:PORT/login)
 .post(function(req,res){console.log('processing');
 res.send('processing the login form!');
 });
-MongoClient.connect(uri, function(err, db) {
-    if(err) throw err;
-    console.log('Start the database stuff');
-    //Write database Insert/Update code...
-    var dbo = db.db("mydb");
-    var myobj = { firstInput: "user1", secondInput: "user1again"};
-    dbo.collection("users").insertOne(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("1 user inserted");
-        db.close();
-    });
-    console.log('End database stuff');
-});
+
 //apply the routes to our application
 app.use('/admin', adminRouter);
 //start the server
