@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 const PORT = process.env.PORT || 8080;
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://damonkopsidas:Darkseidis.@cluster0.hcibx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "mongodb+srv://aion:777.@cluster0.hcibx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 //set the port based on environment
 var port = PORT;
 // send our index.html file to the user for the home page
